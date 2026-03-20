@@ -44,7 +44,7 @@ export const useOptimisticPantryCart = (): UseOptimisticPantryCartReturn => {
       apiCall?: () => Promise<void>
     ): Promise<void> => {
       const cartItem: CartItem = {
-        item_id: item.item_id,
+        item_id: item.id,
         item_name: item.item_name,
         quantity,
       };
@@ -52,13 +52,13 @@ export const useOptimisticPantryCart = (): UseOptimisticPantryCartReturn => {
       const previousCart = cart;
 
       // Check if item already in cart
-      const existingItem = cart.find((c) => c.item_id === item.item_id);
+      const existingItem = cart.find((c) => c.item_id === item.id);
       if (existingItem) {
         // Update quantity optimistically
         setCart((prev) =>
           createOptimisticListUpdate(
             prev,
-            item.item_id,
+            item.id,
             { quantity: existingItem.quantity + quantity },
             'item_id'
           )

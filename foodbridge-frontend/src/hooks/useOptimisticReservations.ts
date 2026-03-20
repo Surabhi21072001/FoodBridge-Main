@@ -38,12 +38,13 @@ export const useOptimisticReservations = (): UseOptimisticReservationsReturn => 
     ): Promise<Reservation> => {
       // Create optimistic reservation object
       const optimisticReservation: Reservation = {
-        reservation_id: `temp-${Date.now()}`,
+        id: `temp-${Date.now()}`,
         listing_id: listing.listing_id,
-        student_id: '', // Will be populated by API
+        user_id: '',
         quantity,
-        status: 'active',
+        status: 'pending',
         created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
         listing: {
           ...listing,
           available_quantity: listing.available_quantity - quantity,
@@ -61,7 +62,7 @@ export const useOptimisticReservations = (): UseOptimisticReservationsReturn => 
         // Replace temporary reservation with actual one
         setReservations((prev) =>
           prev.map((r) =>
-            r.reservation_id === optimisticReservation.reservation_id ? result : r
+            r.id === optimisticReservation.id ? result : r
           )
         );
 

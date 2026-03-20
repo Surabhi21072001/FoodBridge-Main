@@ -10,7 +10,7 @@ class ProfileService {
    * Get user profile
    * Fetches current user profile data from the backend API
    */
-  async getProfile(userId: string): Promise<UserProfile> {
+  async getProfile(_userId: string): Promise<UserProfile> {
     try {
       const response = await api.get<any>(`/users/profile`);
       return response?.data || {};
@@ -24,7 +24,7 @@ class ProfileService {
    * Sends profile updates to the backend API
    * Supports updating dietary preferences, allergies, preferred food types, and notification preferences
    */
-  async updateProfile(userId: string, data: UpdateProfileData): Promise<UserProfile> {
+  async updateProfile(_userId: string, data: UpdateProfileData): Promise<UserProfile> {
     try {
       const response = await api.put<any>(`/users/profile`, data);
       return response?.data || {};
@@ -38,7 +38,7 @@ class ProfileService {
    * Sends preference updates to the backend API
    * Supports updating dietary preferences, allergies, preferred food types, and notification preferences
    */
-  async updatePreferences(userId: string, preferences: Preferences): Promise<void> {
+  async updatePreferences(_userId: string, preferences: Preferences): Promise<void> {
     try {
       await api.patch(`/users/profile`, preferences);
     } catch (error) {

@@ -54,7 +54,6 @@ const LISTING_TYPES = [
 const CreateListingForm: React.FC<CreateListingFormProps> = ({ onSuccess, onCancel }) => {
   const { showToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedDietaryTags, setSelectedDietaryTags] = useState<string[]>([]);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -137,15 +136,6 @@ const CreateListingForm: React.FC<CreateListingFormProps> = ({ onSuccess, onCanc
 
   const handleImageChange = (file: File | null) => {
     setSelectedImage(file);
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      setImagePreview(null);
-    }
   };
 
   const handleDietaryTagChange = (tag: string) => {

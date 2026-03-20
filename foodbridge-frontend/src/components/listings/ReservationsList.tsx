@@ -100,9 +100,9 @@ const ReservationsList: React.FC = () => {
                     </h3>
                     <span
                       className={`px-2 py-1 text-xs font-medium rounded ${
-                        reservation.status === 'active'
+                        reservation.status === 'confirmed' || reservation.status === 'pending'
                           ? 'bg-green-100 text-green-800'
-                          : reservation.status === 'completed'
+                          : reservation.status === 'picked_up'
                             ? 'bg-blue-100 text-blue-800'
                             : 'bg-gray-100 text-gray-800'
                       }`}
@@ -117,7 +117,7 @@ const ReservationsList: React.FC = () => {
                     Reserved on: {formatDateTime(reservation.created_at)}
                   </p>
                 </div>
-                {reservation.status === 'active' && (
+                {(reservation.status === 'pending' || reservation.status === 'confirmed') && (
                   <Button
                     variant="danger"
                     size="sm"
