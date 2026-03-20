@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "api_docs_generator",
+  "description": "Automatically updates API documentation in docs/api_reference.md when backend API files are modified, including endpoint paths, parameters, response formats, and example requests.",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "backend/src/routes/**/*.ts",
+      "backend/src/controllers/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Analyze the changes in the backend API files and update docs/api_reference.md with the following information for each endpoint:\n- Endpoint path and HTTP method\n- Request parameters (query, path, body)\n- Response format and status codes\n- Example requests and responses\n- Any authentication requirements\n\nEnsure the documentation is comprehensive and matches the current implementation."
+  },
+  "workspaceFolderName": "FoodBridge",
+  "shortName": "auto-update-api-docs"
+}

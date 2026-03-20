@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "name": "agent_test_generator",
+  "description": "Automatically generates unit tests for new agent tool files, validating API calls, response formats, and error handling",
+  "version": "1",
+  "when": {
+    "type": "fileCreated",
+    "patterns": [
+      "src/agent/tools/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Generate comprehensive unit tests for this new agent tool file. Create the test file in tests/agent_tools/ with the same name but .test.ts extension. The tests should validate: 1) correct API calls are made with proper parameters, 2) response format matches expected schema, 3) error handling for API failures, network errors, and invalid inputs. Use appropriate testing framework (Jest/Vitest) and include mocking for API calls."
+  },
+  "workspaceFolderName": "FoodBridge",
+  "shortName": "agent-tool-tests"
+}

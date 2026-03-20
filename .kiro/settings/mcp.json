@@ -1,0 +1,38 @@
+{
+  "mcpServers": {
+    "foodbridge-db": {
+      "command": "node",
+      "args": ["backend/src/mcp/server.js"],
+      "env": {
+        "NODE_ENV": "development",
+        "DB_HOST": "localhost",
+        "DB_PORT": "5432",
+        "DB_NAME": "foodbridge",
+        "DB_USER": "surabhi"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "query_available_food",
+        "check_pantry_availability",
+        "get_dining_deals",
+        "get_food_listings",
+        "get_pantry_slots"
+      ]
+    },
+    "foodbridge-recipes": {
+      "command": "node",
+      "args": ["backend/src/mcp/recipe-server.js"],
+      "env": {
+        "SPOONACULAR_API_KEY": "a8b1b8c0f9124c4cab164bf4b4eaf6f3",
+        "NODE_ENV": "development"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "search_recipes",
+        "get_recipe_details",
+        "search_recipes_by_cuisine",
+        "get_recipe_nutrition"
+      ]
+    }
+  }
+}

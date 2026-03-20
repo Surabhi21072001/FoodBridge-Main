@@ -1,0 +1,19 @@
+{
+  "enabled": true,
+  "name": "agent_tool_sync",
+  "description": "Automatically scans backend API endpoints and generates corresponding agent tool files when API routes change or new endpoints are created",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "backend/src/routes/**/*.ts",
+      "backend/src/controllers/**/*.ts"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Scan the modified backend API files and check for any new or changed endpoints. For each endpoint found:\n1. Verify if a corresponding tool exists in agent/tools/\n2. If missing, generate a new tool file that:\n   - Calls the API endpoint with proper HTTP method\n   - Accepts structured input parameters matching the endpoint\n   - Returns structured JSON response\n   - Includes proper error handling\n3. Update existing tools if endpoint signatures changed\n4. Report which tools were created, updated, or verified as current"
+  },
+  "workspaceFolderName": "FoodBridge",
+  "shortName": "sync-api-tools"
+}
