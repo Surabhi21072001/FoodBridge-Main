@@ -150,10 +150,10 @@ This is not just a product — it is infrastructure for equitable food access on
 ### Alternatives Considered
 
 **Python/FastAPI vs Node.js/Express**
-FastAPI offers automatic OpenAPI docs and async-first design. We chose Express because the entire team was already writing TypeScript for the frontend, keeping the cognitive overhead low and enabling shared type definitions.
+FastAPI offers automatic OpenAPI docs and async-first design. I chose Express because I was already writing TypeScript for the frontend, keeping the cognitive overhead low and enabling shared type definitions.
 
 **Redux vs React Context API**
-Redux provides more predictable state for complex apps. We chose Context API because the state surface (auth, notifications, chat) is small and well-scoped. Adding Redux would have been premature optimization.
+Redux provides more predictable state for complex apps. I chose Context API because the state surface (auth, notifications, chat) is small and well-scoped. Adding Redux would have been premature optimization.
 
 **REST-only vs REST + MCP**
 The AI agent initially called all backend endpoints via REST. For read-heavy queries (food search, pantry slots, dining deals), this added unnecessary HTTP overhead and auth token forwarding. The MCP server gives the agent direct, parameterized database access for read operations while mutations still go through the REST API with full auth enforcement.
