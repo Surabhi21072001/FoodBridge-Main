@@ -4,31 +4,127 @@ A campus food access platform that reduces food waste and improves student acces
 
 ---
 
+## Try the App
+
+🌐 **[https://mellifluous-babka-707dea.netlify.app](https://mellifluous-babka-707dea.netlify.app)**
+
+No setup required — just open the link and log in with one of the accounts below.
+
+| Role | Email | Password |
+|------|-------|----------|
+| Student | `alice.student@university.edu` | `password123` |
+| Provider | `dininghall@university.edu` | `DiningHall2024!` |
+
+The student account lets you browse listings, make reservations, book pantry slots, and chat with the AI assistant. The provider account gives access to the dashboard for managing listings and tracking reservations.
+
+---
+
+## Live Demo
+
+| | URL |
+|---|---|
+| Frontend (Netlify) | https://mellifluous-babka-707dea.netlify.app |
+| Backend API (Heroku) | https://frozen-tor-38341-22d18d6cc6b1.herokuapp.com |
+
+---
+
 ## Project Overview
 
 ### Problem Statement
 
-Campus food insecurity affects a significant portion of students, while dining halls and campus events routinely discard surplus food. There's no centralized, low-friction way for providers to redistribute surplus food or for students to discover and claim it in time.
+Food insecurity on college campuses is a silent but widespread issue. Many students struggle to afford regular meals, often skipping food or choosing between basic needs. At the same time, campus dining halls, student events, and local vendors generate significant amounts of surplus food every day — most of which goes to waste.
 
-**Target Users:**
-- Students seeking affordable or free food resources
-- Providers (dining halls, clubs, restaurants, event organizers) with surplus food to donate
-- Admins managing pantry inventory and system configuration
+The core problem is not scarcity — it's lack of visibility and coordination.
 
-### Solution Summary
+There is no unified system where:
+- students can discover available food in real time
+- providers can easily redistribute surplus
+- communities can actively reduce waste
 
-FoodBridge AI provides a real-time food listing and reservation system with an embedded AI assistant that lets users accomplish tasks through natural conversation — searching for food, reserving meals, booking pantry appointments, and generating smart pantry carts based on their history.
+### Solution Vision
 
-**Key Features:**
-- Food listing search with dietary, location, and category filters
-- Reservation system with real-time quantity tracking
-- Pantry appointment booking with Google Calendar sync
-- AI assistant with 30+ tool integrations for natural language task execution
-- Smart pantry cart generation based on user preference history
-- Notification system for food alerts and confirmations
-- Provider dashboard with metrics and reservation visibility
-- Volunteer coordination for food redistribution events
-- Dining deals and event food listings
+FoodBridge AI transforms fragmented food access into a centralized, intelligent marketplace. It acts as a real-time campus food exchange platform, where surplus food is no longer wasted but redistributed efficiently to students who need it most.
+
+But FoodBridge goes beyond a traditional marketplace. It introduces an agentic AI layer that eliminates friction entirely. Instead of manually searching for food, comparing options, booking appointments, and tracking availability — students simply talk to an AI assistant, and the system handles everything.
+
+### What Makes FoodBridge Different
+
+FoodBridge is not just a listing platform or chatbot. It is an agent-driven system that takes action on behalf of the user.
+
+The AI assistant can understand intent, retrieve real-time data, make reservations, book pantry slots, suggest meals based on available ingredients, and guide users toward community engagement.
+
+This shifts the experience from:
+
+> search → filter → decide → act
+
+to:
+
+> ask → agent executes → done
+
+### Impact
+
+FoodBridge creates impact at multiple levels:
+- Students gain access to affordable or free food with minimal effort
+- Providers reduce food waste and contribute to the community
+- Universities demonstrate care for student well-being
+- Communities become more sustainable and connected
+
+This is not just a product — it is infrastructure for equitable food access on campus.
+
+### Target Users
+
+- Students facing food insecurity or looking for affordable meals
+- Students who want quick, convenient access to food options
+- Food providers (dining halls, clubs, restaurants, event organizers)
+- University administrators managing food programs and resources
+
+---
+
+## Key Features
+
+### 🧠 Agentic AI Assistant (Core Innovation)
+- Conversational AI that executes real actions — not just responses
+- Handles food discovery, reservations, pantry booking, and recommendations
+- Uses tools + MCP integrations for real-time, structured decision-making
+
+### 🍱 Real-Time Food Marketplace
+- Centralized platform for all campus food sources
+- Listings from dining halls, events, clubs, and local vendors
+- Live availability and quantity tracking
+
+### ⚡ One-Command Task Execution
+- Users can complete workflows in a single message: "Find cheap meals near me", "Book a pantry slot tomorrow", "Reserve the second option"
+- Agent handles the entire flow end-to-end
+
+### 🥗 Smart Food Discovery
+- Dietary filters (vegetarian, vegan, halal, gluten-free, etc.)
+- Location-based discovery
+- Category-based browsing (events, deals, pantry, surplus)
+
+### 🧾 Reservation & Booking System
+- Real-time reservation locking
+- Pantry appointment scheduling with Google Calendar integration
+- Confirmation and tracking via notifications
+
+### 🧑‍🍳 AI-Powered Recipe Suggestions
+- Suggests meals based on pantry inventory
+- Reduces waste by helping students use available food
+- Powered by MCP integrations
+
+### 🔔 Intelligent Notifications
+- Alerts for new food listings
+- Reservation confirmations
+- Time-sensitive reminders
+
+### 🤝 Community & Volunteering Layer
+- Encourages students to participate in redistribution efforts
+- Connects volunteers to food distribution events
+- Builds a culture of community contribution
+
+### 📊 Provider Dashboard
+- Track food distribution and reservations
+- Monitor demand and usage
+- Manage listings and inventory
 
 ---
 
@@ -171,7 +267,7 @@ The recipe suggestion tool (`suggestRecipes`) also uses MCP to query pantry inve
 
 ## Learning Journey & Forward Thinking
 
-### Challenges and How We Overcame Them
+### Challenges and How I Overcame Them
 
 **Agent tool drift:** As the backend API evolved, agent tool files fell out of sync with endpoint signatures. The `sync-api-tools` hook solved this, but the real lesson was to define tool schemas and API contracts together from the start rather than retrofitting tools onto existing endpoints.
 
@@ -236,32 +332,40 @@ npm install
 cp backend/.env.example backend/.env
 ```
 
-Edit `backend/.env`:
+Edit `backend/.env`. Here's what each variable does and whether you actually need it:
 
 ```env
-# Database
+# --- Required (core app won't start without these) ---
+
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=foodbridge
 DB_USER=postgres
-DB_PASSWORD=your_password
+DB_PASSWORD=your_password      # your local postgres password
 
-# Auth
-JWT_SECRET=your_jwt_secret
-
-# OpenAI
-OPENAI_API_KEY=sk-...
-
-# Google Calendar (optional)
-GOOGLE_CLIENT_ID=...
-GOOGLE_CLIENT_SECRET=...
-GOOGLE_REDIRECT_URI=http://localhost:3001/api/auth/google/calendar/callback
-
-# Server
+JWT_SECRET=any_random_string   # used to sign auth tokens — any value works locally
 PORT=3001
 NODE_ENV=development
 CORS_ORIGIN=http://localhost:5173
+
+# --- Required for AI chat ---
+# The AI assistant won't respond without this.
+# Get one at https://platform.openai.com/api-keys
+
+OPENAI_API_KEY=sk-...
+
+# --- Optional: Google Calendar integration ---
+# Skip these if you don't need calendar sync.
+# The app runs fully without them — pantry booking still works,
+# events just won't appear in Google Calendar.
+# Setup guide: https://console.cloud.google.com/apis/credentials
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REDIRECT_URI=http://localhost:3001/api/auth/google/calendar/callback
 ```
+
+If you want to run the app without an OpenAI key (browse listings, make reservations, book pantry slots), everything works except the chat assistant. Just leave `OPENAI_API_KEY` blank and the chat widget will return an error on send — no other functionality is affected.
 
 ### 3. Set up the database
 
