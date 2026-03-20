@@ -190,9 +190,9 @@ Vibe coding with Kiro meant describing intent in plain language and letting Kiro
 
 **Best moments:**
 
-The Google Calendar integration was the clearest example. Rather than writing the OAuth flow, token refresh logic, and non-blocking calendar event creation from scratch, we described the desired behavior: "When a pantry appointment is booked, silently create a Google Calendar event if the user has connected their calendar. Never fail the booking if the calendar call fails." Kiro generated the full `CalendarService` class, the `CalendarTokenRepository`, the OAuth routes, and the frontend `GoogleCalendarConnect` component in one pass — including the token refresh retry logic and the `is_connected = false` fallback for revoked tokens.
+The Google Calendar integration was the clearest example. Rather than writing the OAuth flow, token refresh logic, and non-blocking calendar event creation from scratch, I described the desired behavior: "When a pantry appointment is booked, silently create a Google Calendar event if the user has connected their calendar. Never fail the booking if the calendar call fails." Kiro generated the full `CalendarService` class, the `CalendarTokenRepository`, the OAuth routes, and the frontend `GoogleCalendarConnect` component in one pass — including the token refresh retry logic and the `is_connected = false` fallback for revoked tokens.
 
-The provider listing chatbot was another strong example. We described the conversational flow ("collect fields progressively, confirm before posting, convert natural language dates to ISO 8601") and Kiro produced the tool definition, executor case, system prompt update, and `formatListingCreated` formatter together.
+The provider listing chatbot was another strong example. I described the conversational flow ("collect fields progressively, confirm before posting, convert natural language dates to ISO 8601") and Kiro produced the tool definition, executor case, system prompt update, and `formatListingCreated` formatter together.
 
 **Conversation structure that worked best:**
 1. Describe the feature in one paragraph, including edge cases
@@ -243,7 +243,7 @@ Three steering files guided every Kiro interaction in this workspace:
 
 **`structure.md`** — Defined the planned directory structure and architectural layers. This kept generated code in the right place and prevented Kiro from creating ad-hoc file locations.
 
-**Strategy that worked best:** Keeping steering docs concise and factual. Long steering docs with explanations and rationale were less effective than short, directive ones. "Use Zod for validation" outperformed "We chose Zod because it provides runtime validation that matches TypeScript types, which is important for our API security requirements."
+**Strategy that worked best:** Keeping steering docs concise and factual. Long steering docs with explanations and rationale were less effective than short, directive ones. "Use Zod for validation" outperformed "I chose Zod because it provides runtime validation that matches TypeScript types, which is important for my API security requirements."
 
 ### MCP Integration
 
@@ -277,7 +277,7 @@ The recipe suggestion tool (`suggestRecipes`) also uses MCP to query pantry inve
 
 **Conversation context management:** The AI agent needed to resolve references like "the second one" across turns. This required careful session management and a conversation history format that the LLM could reliably use for reference resolution.
 
-### What We'd Do Differently
+### What I'd Do Differently
 
 - Define MCP tool schemas before REST endpoints, not after — the MCP interface is closer to what the agent actually needs
 - Write steering docs on day one, not after noticing Kiro generating inconsistent code
