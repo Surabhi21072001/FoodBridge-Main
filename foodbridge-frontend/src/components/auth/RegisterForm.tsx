@@ -18,6 +18,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
     password: '',
     confirmPassword: '',
     role: 'student',
+    first_name: '',
+    last_name: '',
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -27,6 +29,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
   // Validate form fields
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
+
+    // Name validation
+    if (!formData.first_name.trim()) {
+      newErrors.first_name = 'First name is required';
+    }
+    if (!formData.last_name.trim()) {
+      newErrors.last_name = 'Last name is required';
+    }
 
     // Email validation
     if (!formData.email.trim()) {
@@ -125,6 +135,34 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
           {generalError}
         </div>
       )}
+
+      {/* First and last name */}
+      <div className="flex gap-3">
+        <Input
+          label="First Name"
+          type="text"
+          name="first_name"
+          value={formData.first_name}
+          onChange={handleInputChange}
+          error={errors.first_name}
+          placeholder="First name"
+          required
+          disabled={isLoading}
+          autoComplete="given-name"
+        />
+        <Input
+          label="Last Name"
+          type="text"
+          name="last_name"
+          value={formData.last_name}
+          onChange={handleInputChange}
+          error={errors.last_name}
+          placeholder="Last name"
+          required
+          disabled={isLoading}
+          autoComplete="family-name"
+        />
+      </div>
 
       {/* Email input */}
       <Input

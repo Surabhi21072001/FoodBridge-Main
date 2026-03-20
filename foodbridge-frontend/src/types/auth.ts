@@ -16,6 +16,8 @@ export interface RegisterData {
   email: string;
   password: string;
   role: 'student' | 'provider';
+  first_name: string;
+  last_name: string;
 }
 
 export interface LoginResponse {
